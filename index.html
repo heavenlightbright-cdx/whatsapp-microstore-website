@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Microstore Creation - Transform Your Business</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); }
+        .whatsapp-green { background-color: #25D366; }
+        .whatsapp-dark { background-color: #128C7E; }
+        .animate-float { animation: float 3s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        
+        /* Mobile-First Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem !important; line-height: 1.2; }
+            .hero-subtitle { font-size: 1.1rem !important; }
+            .floating-element { display: none; }
+            .particles { display: none; }
+            .chatbot-window { width: 95vw !important; right: 2.5vw !important; }
+            .grid { grid-template-columns: 1fr !important; }
+            .md\\:grid-cols-2 { grid-template-columns: 1fr !important; }
+            .md\\:grid-cols-3 { grid-template-columns: 1fr !important; }
+            .lg\\:grid-cols-3 { grid-template-columns: 1fr !important; }
+            .md\\:flex-row { flex-direction: column !important; }
+            .container { padding-left: 1rem; padding-right: 1rem; }
+            .py-20 { padding-top: 3rem; padding-bottom: 3rem; }
+            .text-5xl { font-size: 2.5rem; }
+            .text-6xl { font-size: 3rem; }
+            .space-x-6 { gap: 1rem; flex-direction: column; }
+            .hidden.md\\:flex { display: none !important; }
+        }
+        
+        @media (min-width: 769px) {
+            .mobile-only { display: none !important; }
+        }
+        
+        @media (max-width: 768px) {
+            .desktop-only { display: none !important; }
+            .mobile-only { display: block !important; }
+        }
+        
+        /* Modern Animations */
+        .animate-pulse-slow { animation: pulse-slow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        @keyframes pulse-slow { 0%, 100% { opacity: 1; } 50% { opacity: .7; } }
+        
+        .animate-bounce-slow { animation: bounce-slow 3s infinite; }
+        @keyframes bounce-slow { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        
+        .animate-slide-in { animation: slideIn 0.8s ease-out; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .animate-scale-in { animation: scaleIn 0.6s ease-out; }
+        @keyframes scaleIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        
+        /* Gradient Backgrounds */
+        .gradient-purple { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .gradient-orange { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .gradient-blue { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .gradient-pink { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+        
+        /* Glass Effect */
+        .glass-effect { 
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Neon Glow */
+        .neon-glow { box-shadow: 0 0 20px rgba(37, 211, 102, 0.5); }
+        .neon-glow:hover { box-shadow: 0 0 30px rgba(37, 211, 102, 0.8); }
+        
+        /* Floating Elements */
+        .floating-element { 
+            position: absolute; 
+            animation: float 6s ease-in-out infinite;
+            opacity: 0.1;
+        }
+        .floating-element:nth-child(2) { animation-delay: -2s; }
+        .floating-element:nth-child(3) { animation-delay: -4s; }
+        
+        /* Chat Bot Styles */
+        .chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        .chatbot-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            animation: pulse-glow 2s infinite;
+        }
+        
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
+            50% { box-shadow: 0 4px 30px rgba(37, 211, 102, 0.8); }
+            100% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
+        }
+        
+        .chatbot-window {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 350px;
+            height: 500px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            transform: scale(0);
+            transition: transform 0.3s ease;
+            z-index: 1001;
+        }
+        
+        .chatbot-window.active {
+            transform: scale(1);
+        }
+        
+        .chat-messages {
+            height: 380px;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        
+        .message {
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            border-radius: 15px;
+            max-width: 80%;
+            animation: messageSlide 0.3s ease;
+        }
+        
+        @keyframes messageSlide {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .message.bot {
+            background: #f0f0f0;
+            margin-right: auto;
+        }
+        
+        .message.user {
+            background: #25D366;
+            color: white;
+            margin-left: auto;
+        }
+        
+        /* Particle Background */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: particleFloat 8s linear infinite;
+        }
+        
+        @keyframes particleFloat {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="gradient-bg text-white py-4 sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="bg-white p-2 rounded-full">
+                    <svg class="w-8 h-8 text-green-500" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.63"/>
+                    </svg>
+                </div>
+                <h1 class="text-2xl font-bold">WhatsApp Microstore</h1>
+            </div>
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-6">
+                <a href="#services" class="hover:text-green-200 transition-colors">Services</a>
+                <a href="#pricing" class="hover:text-green-200 transition-colors">Pricing</a>
+                <a href="#process" class="hover:text-green-200 transition-colors">How It Works</a>
+                <a href="#contact" class="hover:text-green-200 transition-colors">Contact</a>
+            </nav>
+            
+            <!-- Mobile Menu Button -->
+            <button onclick="toggleMobileMenu()" class="md:hidden text-white">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+            </button>
+        </div>
+        
+        <!-- Mobile Navigation Menu -->
+        <div id="mobileMenu" class="md:hidden bg-green-700 hidden">
+            <div class="px-4 py-2 space-y-2">
+                <a href="#services" onclick="toggleMobileMenu()" class="block py-2 text-white hover:text-green-200 transition-colors">Services</a>
+                <a href="#pricing" onclick="toggleMobileMenu()" class="block py-2 text-white hover:text-green-200 transition-colors">Pricing</a>
+                <a href="#process" onclick="toggleMobileMenu()" class="block py-2 text-white hover:text-green-200 transition-colors">How It Works</a>
+                <a href="#contact" onclick="toggleMobileMenu()" class="block py-2 text-white hover:text-green-200 transition-colors">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white py-20 relative overflow-hidden">
+        <!-- Particle Background -->
+        <div class="particles">
+            <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+            <div class="particle" style="left: 20%; animation-delay: 1s;"></div>
+            <div class="particle" style="left: 30%; animation-delay: 2s;"></div>
+            <div class="particle" style="left: 40%; animation-delay: 3s;"></div>
+            <div class="particle" style="left: 50%; animation-delay: 4s;"></div>
+            <div class="particle" style="left: 60%; animation-delay: 5s;"></div>
+            <div class="particle" style="left: 70%; animation-delay: 6s;"></div>
+            <div class="particle" style="left: 80%; animation-delay: 7s;"></div>
+            <div class="particle" style="left: 90%; animation-delay: 8s;"></div>
+        </div>
+        
+        <!-- Floating Graphics -->
+        <div class="floating-element top-20 left-10">
+            <svg class="w-20 h-20 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+        </div>
+        <div class="floating-element top-32 right-20">
+            <svg class="w-16 h-16 text-yellow-300" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+            </svg>
+        </div>
+        <div class="floating-element bottom-20 left-20">
+            <svg class="w-12 h-12 text-green-300" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+        </div>
+        
+        <div class="container mx-auto px-4 text-center relative z-10">
+            <div class="animate-bounce-slow mb-8">
+                <div class="bg-white p-4 rounded-full inline-block mb-6 neon-glow animate-pulse-slow">
+                    <svg class="w-16 h-16 text-green-500" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                </div>
+            </div>
+            <h1 class="hero-title text-5xl md:text-6xl font-bold mb-6 animate-slide-in">Turn Your WhatsApp Into a <span class="text-yellow-300 animate-pulse-slow">Sales Machine</span></h1>
+            <p class="hero-subtitle text-xl md:text-2xl mb-8 max-w-3xl mx-auto animate-slide-in" style="animation-delay: 0.2s;">Transform your business WhatsApp into professional product catalogs, menus, and branded stores. Increase your sales and customer engagement instantly!</p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center animate-scale-in" style="animation-delay: 0.4s;">
+                <button onclick="scrollToSection('contact')" class="bg-yellow-400 text-gray-900 px-8 py-4 rounded-full font-semibold text-lg hover:bg-yellow-300 transition-all duration-300 hover:scale-105 neon-glow">Transform My Business 🚀</button>
+                <button onclick="scrollToSection('process')" class="border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-green-600 transition-all duration-300 hover:scale-105 glass-effect">Learn More ✨</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-16 bg-gray-50 relative">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8 text-center">
+                <div class="card-hover gradient-blue text-white p-8 rounded-xl shadow-2xl animate-scale-in neon-glow">
+                    <div class="text-5xl font-bold mb-4 animate-bounce-slow">📊</div>
+                    <div class="text-4xl font-bold mb-2">90%</div>
+                    <p class="text-white opacity-90">of Tanzanian businesses use WhatsApp but not for structured selling</p>
+                </div>
+                <div class="card-hover gradient-orange text-white p-8 rounded-xl shadow-2xl animate-scale-in neon-glow" style="animation-delay: 0.2s;">
+                    <div class="text-5xl font-bold mb-4 animate-bounce-slow">⚡</div>
+                    <div class="text-4xl font-bold mb-2">1 Hour</div>
+                    <p class="text-white opacity-90">Average setup time per client - fast delivery guaranteed</p>
+                </div>
+                <div class="card-hover gradient-pink text-white p-8 rounded-xl shadow-2xl animate-scale-in neon-glow" style="animation-delay: 0.4s;">
+                    <div class="text-5xl font-bold mb-4 animate-bounce-slow">🌟</div>
+                    <div class="text-4xl font-bold mb-2">24/7</div>
+                    <p class="text-white opacity-90">Your WhatsApp store works around the clock to serve customers</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-16 text-gray-800">What We Create for Your Business</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card-hover bg-white p-8 rounded-xl shadow-lg">
+                    <div class="bg-green-100 p-3 rounded-full w-fit mb-6">
+                        <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Product Catalogs</h3>
+                    <p class="text-gray-600">Professional WhatsApp Business catalogs with organized products, prices, and descriptions</p>
+                </div>
+                <div class="card-hover bg-white p-8 rounded-xl shadow-lg">
+                    <div class="bg-blue-100 p-3 rounded-full w-fit mb-6">
+                        <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Digital Menus</h3>
+                    <p class="text-gray-600">Beautiful restaurant and food business menus that customers can browse easily</p>
+                </div>
+                <div class="card-hover bg-white p-8 rounded-xl shadow-lg">
+                    <div class="bg-purple-100 p-3 rounded-full w-fit mb-6">
+                        <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Branded Flyers</h3>
+                    <p class="text-gray-600">Eye-catching promotional materials and business flyers for marketing campaigns</p>
+                </div>
+                <div class="card-hover bg-white p-8 rounded-xl shadow-lg">
+                    <div class="bg-red-100 p-3 rounded-full w-fit mb-6">
+                        <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Business Setup</h3>
+                    <p class="text-gray-600">Complete WhatsApp Business account optimization with professional profile setup</p>
+                </div>
+                <div class="card-hover bg-white p-8 rounded-xl shadow-lg">
+                    <div class="bg-yellow-100 p-3 rounded-full w-fit mb-6">
+                        <svg class="w-8 h-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Monthly Management</h3>
+                    <p class="text-gray-600">Ongoing catalog updates, new product additions, and price management services</p>
+                </div>
+                <div class="card-hover bg-white p-8 rounded-xl shadow-lg">
+                    <div class="bg-indigo-100 p-3 rounded-full w-fit mb-6">
+                        <svg class="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Quick Turnaround</h3>
+                    <p class="text-gray-600">Same-day setup available - get your digital store running within hours</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-16 text-gray-800">Simple, Affordable Pricing</h2>
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="card-hover bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-xl border-2 border-green-200">
+                    <div class="text-center mb-6">
+                        <h3 class="text-2xl font-bold text-green-800 mb-2">One-Time Setup</h3>
+                        <div class="text-4xl font-bold text-green-600 mb-2">TZS 20,000 - 40,000</div>
+                        <p class="text-green-700">Complete WhatsApp store setup</p>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center text-green-700">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            WhatsApp Business setup
+                        </li>
+                        <li class="flex items-center text-green-700">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            Product catalog creation
+                        </li>
+                        <li class="flex items-center text-green-700">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            Professional profile optimization
+                        </li>
+                        <li class="flex items-center text-green-700">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            Branded flyer design
+                        </li>
+                        <li class="flex items-center text-green-700">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            Training & support
+                        </li>
+                    </ul>
+                    <button onclick="openContactModal('setup')" class="w-full whatsapp-green text-white py-3 rounded-lg font-semibold hover:bg-green-600 transition-colors">Get Started</button>
+                </div>
+                <div class="card-hover bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-xl border-2 border-blue-200">
+                    <div class="text-center mb-6">
+                        <h3 class="text-2xl font-bold text-blue-800 mb-2">Monthly Management</h3>
+                        <div class="text-4xl font-bold text-blue-600 mb-2">TZS 10,000 - 15,000</div>
+                        <p class="text-blue-700">Ongoing catalog maintenance</p>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center text-blue-700">
+                            <svg class="w-5 h-5 text-blue-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            New product additions
+                        </li>
+                        <li class="flex items-center text-blue-700">
+                            <svg class="w-5 h-5 text-blue-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            Price updates
+                        </li>
+                        <li class="flex items-center text-blue-700">
+                            <svg class="w-5 h-5 text-blue-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            Monthly promotional flyers
+                        </li>
+                        <li class="flex items-center text-blue-700">
+                            <svg class="w-5 h-5 text-blue-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            Catalog optimization
+                        </li>
+                        <li class="flex items-center text-blue-700">
+                            <svg class="w-5 h-5 text-blue-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                            Priority support
+                        </li>
+                    </ul>
+                    <button onclick="openContactModal('management')" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">Subscribe</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="process" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-16 text-gray-800">How We Transform Your Business</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="space-y-8">
+                    <div class="flex items-start space-x-6">
+                        <div class="bg-green-500 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold text-lg flex-shrink-0">1</div>
+                        <div class="card-hover bg-white p-6 rounded-xl shadow-lg flex-1">
+                            <h3 class="text-xl font-semibold mb-3 text-gray-800">Free Consultation</h3>
+                            <p class="text-gray-600">We visit your business or meet online to understand your products, services, and current WhatsApp usage. No commitment required.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-6">
+                        <div class="bg-blue-500 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold text-lg flex-shrink-0">2</div>
+                        <div class="card-hover bg-white p-6 rounded-xl shadow-lg flex-1">
+                            <h3 class="text-xl font-semibold mb-3 text-gray-800">Professional Setup</h3>
+                            <p class="text-gray-600">We set up your WhatsApp Business account, create your product catalog with professional photos, and optimize your business profile.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-6">
+                        <div class="bg-purple-500 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold text-lg flex-shrink-0">3</div>
+                        <div class="card-hover bg-white p-6 rounded-xl shadow-lg flex-1">
+                            <h3 class="text-xl font-semibold mb-3 text-gray-800">Training & Launch</h3>
+                            <p class="text-gray-600">We train you and your staff on using the new system, provide marketing materials, and ensure everything works perfectly.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-6">
+                        <div class="bg-yellow-500 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold text-lg flex-shrink-0">4</div>
+                        <div class="card-hover bg-white p-6 rounded-xl shadow-lg flex-1">
+                            <h3 class="text-xl font-semibold mb-3 text-gray-800">Ongoing Support</h3>
+                            <p class="text-gray-600">Optional monthly management service to keep your catalog updated, add new products, and create promotional materials.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-16 text-gray-800">Why Choose Our WhatsApp Store Service?</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="card-hover bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-xl">
+                        <div class="bg-green-100 p-3 rounded-full w-fit mb-6">
+                            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-green-800 mb-4">Fast Results</h3>
+                        <p class="text-green-700">Get your professional WhatsApp store up and running within 24 hours. Start seeing increased customer engagement immediately.</p>
+                    </div>
+                    <div class="card-hover bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-xl">
+                        <div class="bg-blue-100 p-3 rounded-full w-fit mb-6">
+                            <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-blue-800 mb-4">Proven Success</h3>
+                        <p class="text-blue-700">Our clients see average sales increases of 200-400% after implementing their WhatsApp catalog system.</p>
+                    </div>
+                    <div class="card-hover bg-gradient-to-br from-purple-50 to-purple-100 p-8 rounded-xl">
+                        <div class="bg-purple-100 p-3 rounded-full w-fit mb-6">
+                            <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M12 2.25a9.75 9.75 0 100 19.5 9.75 9.75 0 000-19.5z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-purple-800 mb-4">Full Support</h3>
+                        <p class="text-purple-700">Complete training, ongoing support, and regular updates to keep your digital store performing at its best.</p>
+                    </div>
+                    <div class="card-hover bg-gradient-to-br from-yellow-50 to-yellow-100 p-8 rounded-xl">
+                        <div class="bg-yellow-100 p-3 rounded-full w-fit mb-6">
+                            <svg class="w-8 h-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-yellow-800 mb-4">Affordable Pricing</h3>
+                        <p class="text-yellow-700">Professional digital transformation at prices that make sense for small businesses. No hidden fees or surprises.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-16 text-gray-800">Success Stories</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="card-hover bg-white p-6 rounded-xl shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-green-100 p-2 rounded-full mr-3">
+                            <svg class="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Mama Fatuma</h4>
+                            <p class="text-sm text-gray-600">Restaurant Owner</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">"My food orders increased by 300% after getting my WhatsApp menu. Customers love how easy it is to browse and order!"</p>
+                </div>
+                <div class="card-hover bg-white p-6 rounded-xl shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-blue-100 p-2 rounded-full mr-3">
+                            <svg class="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">John's Electronics</h4>
+                            <p class="text-sm text-gray-600">Electronics Shop</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">"Now my customers can see all my products with prices instantly. No more sending individual photos. Sales doubled!"</p>
+                </div>
+                <div class="card-hover bg-white p-6 rounded-xl shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-purple-100 p-2 rounded-full mr-3">
+                            <svg class="w-6 h-6 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Beauty Corner</h4>
+                            <p class="text-sm text-gray-600">Cosmetics Store</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">"The professional catalog made my business look so much better. Customers trust me more and buy more products!"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feedback Button Section -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-6 text-gray-800">Love Our Service?</h2>
+            <p class="text-gray-600 mb-8 max-w-2xl mx-auto">Your feedback helps us improve and helps other businesses discover our WhatsApp transformation services!</p>
+            <button onclick="openFeedbackModal()" class="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-yellow-500 hover:to-orange-600 transition-all duration-300 hover:scale-105 shadow-lg">
+                ⭐ Share Your Experience
+            </button>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 gradient-bg text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold mb-8">Ready to Transform Your Business?</h2>
+            <p class="text-xl mb-12 max-w-2xl mx-auto">Join hundreds of Tanzanian businesses already using WhatsApp to boost their sales. Get your professional digital store today!</p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                <button onclick="openContactModal('general')" class="bg-yellow-400 text-gray-900 px-8 py-4 rounded-full font-semibold text-lg hover:bg-yellow-300 transition-colors">Get Started Now</button>
+                <a href="#contact" onclick="openContactModal('general')" class="border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-green-600 transition-colors inline-block">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feedback Modal -->
+    <div id="feedbackModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl max-w-md w-full p-6 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-gray-800">Share Your Experience</h3>
+                <button onclick="closeFeedbackModal()" class="text-gray-500 hover:text-gray-700">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <form id="feedbackForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Your Name</label>
+                    <input type="text" id="feedbackName" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                    <input type="email" id="feedbackEmail" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Rating</label>
+                    <div class="flex space-x-2" id="starRating">
+                        <span class="star cursor-pointer text-3xl text-gray-300 hover:text-yellow-400" data-rating="1">⭐</span>
+                        <span class="star cursor-pointer text-3xl text-gray-300 hover:text-yellow-400" data-rating="2">⭐</span>
+                        <span class="star cursor-pointer text-3xl text-gray-300 hover:text-yellow-400" data-rating="3">⭐</span>
+                        <span class="star cursor-pointer text-3xl text-gray-300 hover:text-yellow-400" data-rating="4">⭐</span>
+                        <span class="star cursor-pointer text-3xl text-gray-300 hover:text-yellow-400" data-rating="5">⭐</span>
+                    </div>
+                    <input type="hidden" id="rating" value="0">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Your Feedback</label>
+                    <textarea id="feedbackMessage" rows="4" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="Tell us about your experience with our WhatsApp Microstore service..." required></textarea>
+                </div>
+                <button type="submit" class="w-full bg-green-500 text-white py-3 rounded-lg font-semibold hover:bg-green-600 transition-colors">Submit Feedback</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Contact Modal -->
+    <div id="contactModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl max-w-md w-full p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-gray-800">Get Started Today</h3>
+                <button onclick="closeContactModal()" class="text-gray-500 hover:text-gray-700">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <form id="contactForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Your Name</label>
+                    <input type="text" id="name" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                    <input type="tel" id="phone" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Business Type</label>
+                    <select id="businessType" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" required>
+                        <option value="">Select your business type</option>
+                        <option value="restaurant">Restaurant/Food</option>
+                        <option value="boutique">Boutique/Fashion</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="cosmetics">Cosmetics/Beauty</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Service Needed</label>
+                    <select id="serviceType" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" required>
+                        <option value="">Select service</option>
+                        <option value="setup">One-time Setup (TZS 20,000-40,000)</option>
+                        <option value="management">Monthly Management (TZS 10,000-15,000)</option>
+                        <option value="both">Both Setup + Management</option>
+                    </select>
+                </div>
+                <div class="space-y-3">
+                    <button type="submit" class="w-full whatsapp-green text-white py-3 rounded-lg font-semibold hover:bg-green-600 transition-colors flex items-center justify-center space-x-2">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.63"/>
+                        </svg>
+                        <span>Send via WhatsApp</span>
+                    </button>
+                    <button type="button" onclick="sendViaSMS()" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors flex items-center justify-center space-x-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                        </svg>
+                        <span>Send via SMS</span>
+                    </button>
+                    <p class="text-xs text-gray-500 text-center">Choose WhatsApp (if installed) or SMS for direct contact</p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- AI Chatbot -->
+    <div class="chatbot-container">
+        <div id="chatbotWindow" class="chatbot-window">
+            <div class="bg-gradient-to-r from-green-500 to-green-600 text-white p-4 rounded-t-xl flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center">
+                        <svg class="w-6 h-6 text-green-500" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold">WhatsApp Assistant</h4>
+                        <p class="text-xs opacity-90">Online 24/7</p>
+                    </div>
+                </div>
+                <button onclick="toggleChatbot()" class="text-white hover:text-gray-200">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div id="chatMessages" class="chat-messages">
+                <div class="message bot">
+                    <p>👋 Hi! I'm your WhatsApp Microstore Assistant. How can I help you today?</p>
+                </div>
+            </div>
+            
+            <div class="p-4 border-t">
+                <div class="flex space-x-2 mb-3">
+                    <button onclick="sendQuickMessage('What services do you offer?')" class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm hover:bg-gray-200 transition-colors">Services</button>
+                    <button onclick="sendQuickMessage('How much does it cost?')" class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm hover:bg-gray-200 transition-colors">Pricing</button>
+                    <button onclick="sendQuickMessage('How long does setup take?')" class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm hover:bg-gray-200 transition-colors">Timeline</button>
+                </div>
+                <div class="flex space-x-2">
+                    <input type="text" id="chatInput" placeholder="Type your message..." class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" onkeypress="handleChatKeyPress(event)">
+                    <button onclick="sendChatMessage()" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <button onclick="toggleChatbot()" class="chatbot-button flex items-center justify-center text-white hover:scale-110 transition-transform">
+            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4l4 4 4-4h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="bg-green-500 p-2 rounded-full">
+                            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.63"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold">WhatsApp Microstore</h3>
+                    </div>
+                    <p class="text-gray-400">Transforming small businesses in Tanzania through WhatsApp digital stores and catalogs.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Services</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li>WhatsApp Business Setup</li>
+                        <li>Product Catalog Creation</li>
+                        <li>Digital Menu Design</li>
+                        <li>Branded Flyer Creation</li>
+                        <li>Monthly Management</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contact</h4>
+                    <div class="space-y-2 text-gray-400">
+                        <p>📱 WhatsApp: +255764788820</p>
+                        <p>📧 Email: heavenlightbright@gmail.com</p>
+                        <p>📍 Dar es Salaam, Tanzania</p>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 WhatsApp Microstore. All rights reserved. Built for Tanzanian entrepreneurs.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Device Detection
+        function isMobile() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
+        }
+
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        // Star Rating System
+        document.addEventListener('DOMContentLoaded', function() {
+            const stars = document.querySelectorAll('.star');
+            const ratingInput = document.getElementById('rating');
+            
+            stars.forEach(star => {
+                star.addEventListener('click', function() {
+                    const rating = this.getAttribute('data-rating');
+                    ratingInput.value = rating;
+                    
+                    stars.forEach((s, index) => {
+                        if (index < rating) {
+                            s.classList.remove('text-gray-300');
+                            s.classList.add('text-yellow-400');
+                        } else {
+                            s.classList.remove('text-yellow-400');
+                            s.classList.add('text-gray-300');
+                        }
+                    });
+                });
+            });
+        });
+
+        // Feedback Form Handler
+        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('feedbackName').value;
+            const email = document.getElementById('feedbackEmail').value;
+            const rating = document.getElementById('rating').value;
+            const message = document.getElementById('feedbackMessage').value;
+            
+            // Create email content
+            const emailSubject = `Feedback from ${name} - ${rating} Stars`;
+            const emailBody = `
+Name: ${name}
+Email: ${email}
+Rating: ${rating}/5 Stars
+Feedback: ${message}
+Date: ${new Date().toLocaleDateString()}
+            `;
+            
+            // Send via email (mailto)
+            const mailtoLink = `mailto:heavenlightbright@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+            window.location.href = mailtoLink;
+            
+            // Show success message and close modal
+            alert('Thank you for your feedback! Your email client will open to send the feedback.');
+            
+            // Reset form
+            this.reset();
+            document.getElementById('rating').value = '0';
+            document.querySelectorAll('.star').forEach(star => {
+                star.classList.remove('text-yellow-400');
+                star.classList.add('text-gray-300');
+            });
+            
+            // Close modal
+            closeFeedbackModal();
+        });
+
+        // SMS Sending Function
+        function sendViaSMS() {
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const businessType = document.getElementById('businessType').value;
+            const serviceType = document.getElementById('serviceType').value;
+            
+            if (!name || !phone || !businessType || !serviceType) {
+                alert('Please fill in all fields before sending SMS.');
+                return;
+            }
+            
+            const message = `WhatsApp Microstore Inquiry - Name: ${name}, Phone: ${phone}, Business: ${businessType}, Service: ${serviceType}`;
+            
+            // Create SMS link
+            const smsLink = `sms:+255764788820?body=${encodeURIComponent(message)}`;
+            window.location.href = smsLink;
+            
+            closeContactModal();
+        }
+
+        function openContactModal(serviceType) {
+            document.getElementById('contactModal').classList.remove('hidden');
+            if (serviceType === 'setup') {
+                document.getElementById('serviceType').value = 'setup';
+            } else if (serviceType === 'management') {
+                document.getElementById('serviceType').value = 'management';
+            }
+        }
+
+        function closeContactModal() {
+            document.getElementById('contactModal').classList.add('hidden');
+        }
+
+        function openFeedbackModal() {
+            document.getElementById('feedbackModal').classList.remove('hidden');
+        }
+
+        function closeFeedbackModal() {
+            document.getElementById('feedbackModal').classList.add('hidden');
+        }
+
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const businessType = document.getElementById('businessType').value;
+            const serviceType = document.getElementById('serviceType').value;
+            
+            const message = `Hi! I'm interested in WhatsApp Microstore services.
+
+Name: ${name}
+Phone: ${phone}
+Business Type: ${businessType}
+Service Needed: ${serviceType}
+
+Please contact me to discuss setting up my WhatsApp store.`;
+            
+            // Try WhatsApp first, fallback to SMS if not available
+            const whatsappNumber = '255764788820';
+            
+            if (isMobile() || navigator.userAgent.includes('WhatsApp')) {
+                // Mobile or WhatsApp available - use WhatsApp
+                const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+                window.open(whatsappUrl, '_blank');
+            } else {
+                // Desktop without WhatsApp - offer both options
+                const choice = confirm('Choose your preferred contact method:\nOK = WhatsApp Web\nCancel = SMS');
+                if (choice) {
+                    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+                    window.open(whatsappUrl, '_blank');
+                } else {
+                    const smsMessage = `WhatsApp Microstore Inquiry - Name: ${name}, Phone: ${phone}, Business: ${businessType}, Service: ${serviceType}`;
+                    const smsLink = `sms:+${whatsappNumber}?body=${encodeURIComponent(smsMessage)}`;
+                    window.location.href = smsLink;
+                }
+            }
+            
+            closeContactModal();
+        });
+
+        // Close modals when clicking outside
+        document.getElementById('contactModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeContactModal();
+            }
+        });
+
+        document.getElementById('feedbackModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeFeedbackModal();
+            }
+        });
+
+        // AI Chatbot Functionality
+        let chatbotOpen = false;
+        
+        function toggleChatbot() {
+            const chatWindow = document.getElementById('chatbotWindow');
+            chatbotOpen = !chatbotOpen;
+            
+            if (chatbotOpen) {
+                chatWindow.classList.add('active');
+            } else {
+                chatWindow.classList.remove('active');
+            }
+        }
+        
+        function sendChatMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (message) {
+                addMessage(message, 'user');
+                input.value = '';
+                
+                // Simulate AI response
+                setTimeout(() => {
+                    const response = getAIResponse(message);
+                    addMessage(response, 'bot');
+                }, 1000);
+            }
+        }
+        
+        function sendQuickMessage(message) {
+            addMessage(message, 'user');
+            setTimeout(() => {
+                const response = getAIResponse(message);
+                addMessage(response, 'bot');
+            }, 1000);
+        }
+        
+        function addMessage(text, sender) {
+            const messagesContainer = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            messageDiv.innerHTML = `<p>${text}</p>`;
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+        
+        function getAIResponse(message) {
+            // Advanced AI Response System - Thinks and understands context
+            const lowerMessage = message.toLowerCase();
+            const words = lowerMessage.split(' ');
+            
+            // Business Knowledge Base
+            const businessInfo = {
+                services: ['whatsapp business setup', 'product catalogs', 'digital menus', 'branded flyers', 'monthly management', 'staff training'],
+                pricing: { setup: 'TZS 20,000 - 40,000', monthly: 'TZS 10,000 - 15,000' },
+                timeline: '1-24 hours maximum',
+                contact: { whatsapp: '+255764788820', email: 'heavenlightbright@gmail.com' },
+                benefits: ['200-400% sales increase', 'professional image', '24/7 availability', 'easy ordering'],
+                businessTypes: ['restaurants', 'boutiques', 'electronics', 'cosmetics', 'services', 'retail']
+            };
+            
+            // Intelligent Context Analysis
+            function analyzeIntent(message) {
+                const intents = {
+                    greeting: ['hi', 'hello', 'hey', 'good morning', 'good afternoon', 'good evening'],
+                    pricing: ['price', 'cost', 'expensive', 'cheap', 'afford', 'money', 'pay', 'fee', 'charge'],
+                    services: ['service', 'offer', 'do', 'provide', 'help with', 'can you'],
+                    timeline: ['time', 'long', 'quick', 'fast', 'when', 'how long', 'duration'],
+                    contact: ['contact', 'reach', 'call', 'whatsapp', 'email', 'phone'],
+                    benefits: ['benefit', 'advantage', 'why', 'better', 'improve', 'increase'],
+                    process: ['how', 'process', 'step', 'work', 'procedure'],
+                    business: ['business', 'company', 'shop', 'store', 'restaurant'],
+                    technical: ['whatsapp business', 'catalog', 'setup', 'feature'],
+                    comparison: ['vs', 'versus', 'compare', 'difference', 'better than'],
+                    concern: ['worry', 'concern', 'problem', 'issue', 'difficult']
+                };
+                
+                let detectedIntents = [];
+                for (let intent in intents) {
+                    if (intents[intent].some(keyword => message.includes(keyword))) {
+                        detectedIntents.push(intent);
+                    }
+                }
+                return detectedIntents;
+            }
+            
+            // Smart Response Generation
+            function generateSmartResponse(message, intents) {
+                // Greeting responses
+                if (intents.includes('greeting')) {
+                    const greetings = [
+                        "Hello! 👋 Welcome to WhatsApp Microstore! I'm here to help transform your business into a digital powerhouse. What would you like to know?",
+                        "Hi there! 😊 Great to meet you! I'm your AI assistant for WhatsApp Business transformation. How can I help you grow your business today?",
+                        "Hey! 🚀 Ready to revolutionize your business with WhatsApp? I'm here to answer any questions and guide you through the process!"
+                    ];
+                    return greetings[Math.floor(Math.random() * greetings.length)];
+                }
+                
+                // Complex question handling
+                if (message.includes('what') && message.includes('different')) {
+                    return `🤔 Great question! Let me explain what makes us different:
+
+**Traditional WhatsApp Selling:**
+• Sending individual photos one by one
+• Typing prices manually each time
+• Unprofessional appearance
+• Time-consuming for both you and customers
+
+**Our WhatsApp Microstore Solution:**
+• Professional catalog with organized products
+• Automatic price display
+• Branded business profile
+• Customers browse like an online store
+• 200-400% sales increase on average
+
+We don't just set up WhatsApp - we transform how you do business! 🎯`;
+                }
+                
+                // Pricing with context
+                if (intents.includes('pricing')) {
+                    if (message.includes('worth') || message.includes('value')) {
+                        return `💎 Absolutely worth every shilling! Here's the value breakdown:
+
+**Investment:** TZS 20,000 - 40,000 (one-time)
+**Average Return:** 200-400% sales increase
+**Time Saved:** Hours daily (no more individual photo sending)
+**Professional Image:** Priceless customer trust
+
+**Real Example:** If you make TZS 100,000/month, a 200% increase means TZS 300,000/month. That's TZS 200,000 extra monthly - paying for itself in days!
+
+Plus our clients often recover their investment within the first week. Ready to see these results? 📈`;
+                    }
+                    return `💰 Our pricing is designed for small business success:
+
+**One-Time Setup:** TZS 20,000 - 40,000
+✅ Complete transformation in 24 hours
+✅ Everything included - no hidden costs
+✅ Lifetime access to your catalog
+
+**Optional Monthly Management:** TZS 10,000 - 15,000
+✅ We handle updates for you
+✅ New products added monthly
+✅ Promotional materials created
+
+Most clients see 3x return on investment within the first month! 🚀`;
+                }
+                
+                // Technical questions
+                if (message.includes('how') && (message.includes('work') || message.includes('process'))) {
+                    return `🔧 Here's exactly how we transform your business:
+
+**Step 1: Analysis** (Free)
+• We study your current WhatsApp usage
+• Identify your products/services
+• Plan the perfect catalog structure
+
+**Step 2: Professional Setup**
+• Create WhatsApp Business account
+• Design beautiful product catalog
+• Optimize your business profile
+• Add professional photos and descriptions
+
+**Step 3: Training & Launch**
+• Train you and your staff (30 minutes)
+• Test everything works perfectly
+• Provide marketing materials
+• Go live with your new digital store!
+
+**Step 4: Support**
+• 24/7 WhatsApp support
+• Regular check-ins
+• Updates and improvements
+
+The whole process is seamless - you focus on your business, we handle the tech! 🎯`;
+                }
+                
+                // Business-specific responses
+                if (intents.includes('business')) {
+                    const businessTypes = ['restaurant', 'boutique', 'electronics', 'cosmetics', 'services'];
+                    const mentionedBusiness = businessTypes.find(type => message.includes(type));
+                    
+                    if (mentionedBusiness) {
+                        const examples = {
+                            restaurant: "🍽️ Perfect for restaurants! We'll create a digital menu with photos, prices, and descriptions. Customers can browse your full menu, see daily specials, and order directly. Many restaurant clients see 300% increase in orders!",
+                            boutique: "👗 Ideal for fashion! We'll showcase your clothing with sizes, colors, and prices. Customers can browse collections, see new arrivals, and make purchases easily. Fashion businesses love the professional catalog look!",
+                            electronics: "📱 Great for electronics! We'll organize products by category, include specifications, warranties, and competitive prices. Tech customers appreciate detailed product information in one place!",
+                            cosmetics: "💄 Perfect for beauty businesses! We'll create stunning product galleries with before/after photos, ingredient lists, and pricing. Beauty customers love browsing professional catalogs!",
+                            services: "🔧 Excellent for service businesses! We'll showcase your service packages, pricing tiers, and customer testimonials. Service providers see huge booking increases with professional presentations!"
+                        };
+                        return examples[mentionedBusiness];
+                    }
+                }
+                
+                // Concern handling
+                if (intents.includes('concern') || message.includes('but') || message.includes('however')) {
+                    return `🤝 I understand your concerns - that's completely normal! Let me address this:
+
+**Common Concerns & Solutions:**
+• "Too technical?" - We handle everything, you don't touch any tech
+• "Too expensive?" - Most clients recover investment in 1 week
+• "Will customers adapt?" - They love it! Much easier than current method
+• "What if it doesn't work?" - We guarantee setup and provide full support
+
+**Risk-Free Approach:**
+• Free consultation first
+• See examples from similar businesses
+• No payment until you're 100% satisfied with setup
+• 24/7 support after launch
+
+What specific concern can I help address? I'm here to make this as smooth as possible for you! 💪`;
+                }
+                
+                // Comparison questions
+                if (intents.includes('comparison') || message.includes('other') || message.includes('competitor')) {
+                    return `🏆 Great question! Here's what sets us apart:
+
+**Others vs Us:**
+• Others: Basic setup only → Us: Complete business transformation
+• Others: Generic templates → Us: Custom design for your business
+• Others: Setup and goodbye → Us: Ongoing support and training
+• Others: Focus on tech → Us: Focus on your business growth
+• Others: One-size-fits-all → Us: Tailored to your specific needs
+
+**Unique Advantages:**
+• Same-day setup available
+• Real business growth focus (not just tech)
+• Tanzanian market expertise
+• Proven 200-400% sales increase track record
+• Personal relationship with each client
+
+We're not just service providers - we're your business growth partners! 🤝`;
+                }
+                
+                // Default intelligent response based on context
+                return generateContextualResponse(message, intents);
+            }
+            
+            function generateContextualResponse(message, intents) {
+                // Analyze the overall context and generate appropriate response
+                if (intents.length === 0) {
+                    return `🤔 That's an interesting question! Let me think about this...
+
+Based on what you're asking, I believe you want to know more about how WhatsApp can transform your business. Here's what I can tell you:
+
+Our WhatsApp Microstore service helps businesses like yours increase sales by 200-400% through professional digital catalogs. We handle everything from setup to training.
+
+Could you tell me more specifically what you'd like to know? I'm here to help with:
+• How it works for your type of business
+• Pricing and investment details  
+• Success stories from similar businesses
+• Technical setup process
+• Getting started today
+
+What interests you most? 😊`;
+                }
+                
+                // Multi-intent responses
+                if (intents.includes('services') && intents.includes('pricing')) {
+                    return `📋 Perfect! Let me give you the complete picture:
+
+**Our Services & Pricing:**
+
+**Complete Setup Package (TZS 20,000-40,000):**
+• WhatsApp Business professional setup
+• Custom product catalog with your photos
+• Branded business profile optimization
+• Digital menu/flyer creation
+• Staff training session
+• Marketing materials
+• 24/7 support setup
+
+**Monthly Management (TZS 10,000-15,000):**
+• New product additions
+• Price updates
+• Monthly promotional materials
+• Catalog optimization
+• Priority support
+
+**Why This Investment Makes Sense:**
+• Average 200-400% sales increase
+• Professional business image
+• Time savings (hours daily)
+• 24/7 customer accessibility
+
+Ready to transform your business? Let's start with a free consultation! 🚀`;
+                }
+                
+                // Fallback with learning capability
+                return `💡 Thank you for that question! I'm always learning to better help businesses like yours.
+
+From what you're asking, it sounds like you want to understand more about WhatsApp business transformation. Let me share what might be most relevant:
+
+**Key Points:**
+• We transform regular WhatsApp into professional business tools
+• Setup takes 1-24 hours maximum
+• Investment: TZS 20,000-40,000 for complete transformation
+• Results: 200-400% average sales increase
+• Support: 24/7 via WhatsApp (+255764788820)
+
+**What would help you most right now?**
+• See examples from businesses like yours?
+• Understand the exact process?
+• Discuss pricing options?
+• Schedule a free consultation?
+
+I'm here to help you succeed! 😊`;
+            }
+            
+            // Main response logic
+            const detectedIntents = analyzeIntent(lowerMessage);
+            return generateSmartResponse(lowerMessage, detectedIntents);
+        }
+        
+        function handleChatKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendChatMessage();
+            }
+        }
+        
+        // Auto-open chatbot after 10 seconds (optional)
+        setTimeout(() => {
+            if (!chatbotOpen) {
+                const chatButton = document.querySelector('.chatbot-button');
+                chatButton.classList.add('animate-bounce-slow');
+            }
+        }, 10000);
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96f71cee80b67934',t:'MTc1NTI0NDM1Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
